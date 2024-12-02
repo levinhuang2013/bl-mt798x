@@ -34,19 +34,20 @@
 	gpio-leds {
 		compatible = "gpio-leds";
 
-		led_wlan5g: led_wlan5g {
-			label = "led_wlan5g";
+		led_wlan5g: wlan5g {
+			label = "wlan5g";
 			gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 		};
 
-		led_wlan2g: led_wlan2g {
-			label = "led_wlan2g";
+		led_wlan2g: wlan2g {
+			label = "wlan2g";
 			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
 		};
 
-		led_sys: led_sys {
+		led_sys: sys {
 			label = "sys";
 			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
+			default-state = "on";
 		};
 	};
 
