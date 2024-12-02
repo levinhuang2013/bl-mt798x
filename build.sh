@@ -1,10 +1,10 @@
 #!/bin/sh
 
 TOOLCHAIN=aarch64-linux-gnu-
-#UBOOT_DIR=uboot-mtk-20220606
-UBOOT_DIR=uboot-mtk-20230718-09eda825
-#ATF_DIR=atf-20220606-637ba581b
-ATF_DIR=atf-20231013-0ea67d76a
+UBOOT_DIR=uboot-mtk-20220606
+#UBOOT_DIR=uboot-mtk-20230718-09eda825
+ATF_DIR=atf-20220606-637ba581b
+#ATF_DIR=atf-20231013-0ea67d76a
 
 if [ -z "$SOC" ] || [ -z "$BOARD" ]; then
 	echo "Usage: SOC=[mt7981|mt7986] BOARD=<board name> MULTI_LAYOUT=[0|1] $0"
@@ -76,7 +76,7 @@ make -C "$ATF_DIR" -f makefile all CONFIG_CROSS_COMPILER="${TOOLCHAIN}"
 
 mkdir -p "output"
 if [ -f "$ATF_DIR/build/${SOC}/release/fip.bin" ]; then
-	FIP_NAME="${SOC}_${BOARD}-spinand-512m-fip"
+	FIP_NAME="${SOC}_${BOARD}-fip"
 	if [ "$fixedparts" = "1" ]; then
 		FIP_NAME="${FIP_NAME}-fixed-parts"
 	fi
@@ -91,7 +91,7 @@ else
 fi
 if grep -q "CONFIG_TARGET_ALL_NO_SEC_BOOT=y" "$ATF_DIR/configs/$ATF_CFG"; then
 	if [ -f "$ATF_DIR/build/${SOC}/release/bl2.img" ]; then
-		BL2_NAME="${SOC}_${BOARD}-spinand-512m-bl2"
+		BL2_NAME="${SOC}_${BOARD}-bl2"
 		cp -f "$ATF_DIR/build/${SOC}/release/bl2.img" "output/${BL2_NAME}.bin"
 		echo "$BL2_NAME build done"
 	else
