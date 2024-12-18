@@ -20,7 +20,6 @@
 		bootcmd = "mtkboardboot";
 		blink_led = "sys";
 		system_led = "sys";
-		success_led = "sys";
 	};
 
 	gpio-keys {
