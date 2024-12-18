@@ -18,8 +18,9 @@
 
 	config {
 		bootcmd = "mtkboardboot";
-		blink_led = "wlan5g";
+		blink_led = "sys";
 		system_led = "sys";
+		success_led = "sys";
 	};
 
 	gpio-keys {
@@ -33,16 +34,6 @@
 
 	gpio-leds {
 		compatible = "gpio-leds";
-
-		led_wlan5g: wlan5g {
-			label = "wlan5g";
-			gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
-		};
-
-		led_wlan2g: wlan2g {
-			label = "wlan2g";
-			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
-		};
 
 		led_sys: sys {
 			label = "sys";
@@ -87,7 +78,7 @@
 	bus-width = <8>;
 	cap-mmc-highspeed;
 	cap-mmc-hw-reset;
-	max-frequency = <200000000>;
+	max-frequency = <52000000>;
 	non-removable;
 	pinctrl-names = "default";
 	pinctrl-0 = <&mmc0_pins_default>;
@@ -133,6 +124,12 @@
 
 &uart0 {
 	status = "okay";
+};
+
+&uart1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart1_pins>;
+	status = "disabled";
 };
 
 &watchdog {
